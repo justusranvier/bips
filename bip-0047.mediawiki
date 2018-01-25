@@ -65,7 +65,11 @@ Purpose is a constant set to 47' (or 0x8000002F) following the BIP43 recommendat
 
 ===Coin type===
 
-The coin type field is identical to the same field in BIP44
+Wallets which only support one coin type and use BIP-44 SHOULD set this value per BIP-44
+
+Wallets which support multiple coin types and do not use version 3 payment codes SHOULD create a different payment code for each coin type and set this value per BIP-44.
+
+Wallets which support version 3 payment codes should use one payment code per logical user identity regardless of the number of coin types the wallet supports and SHOULD set this value to 0'.
 
 Hardened derivation is used at this level.
 
@@ -101,10 +105,13 @@ Currently specified versions:
 * Version 2
 ** Address type: P2PKH
 ** Notification type: bloom-multisig
+* Version 3
+** Address type: P2PKH
+** Notification type: bloom-multisig
 
 ===Recommended Versions===
 
-* Wallets which have bloom filtering capabilities SHOULD create version 2 payment codes instead of version 1 payment codes.
+* Wallets which have bloom filtering capabilities SHOULD create version 2 or higher payment codes instead of version 1 payment codes.
 * Version 1 payment codes are only recommended for wallets which lack access to bloom filtering capability.
 
 ==Version 1==
